@@ -6,12 +6,12 @@ var rota:float
 var dir:float
 var speed = 200
 var random;
+@onready var health = 1;
 
 func _ready() -> void:
 	global_position = pos
 	global_rotation = rota
 	random = randi() % 2
-	print(random)
 	match random:
 		0:
 			$AnimatedSprite2D.play("first")
@@ -23,8 +23,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(speed, 0).rotated(dir)
 	move_and_slide()
+	
+	if health <= 0:
+		queue_free()
 
 
 func _on_life_timeout() -> void:
-	queue_free()
+	damage()
 	pass # Replace with function body.
+
+func damage():
+	health -= 1

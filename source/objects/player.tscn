@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cu2lvgquj1el3"]
+[gd_scene load_steps=35 format=3 uid="uid://cu2lvgquj1el3"]
 
 [ext_resource type="Script" path="res://source/objects/player.gd" id="1_kd7cj"]
 [ext_resource type="Texture2D" uid="uid://b53vqtvrfopuq" path="res://assets/images/n4ve.png" id="3_uxnkf"]
@@ -43,6 +43,10 @@ region = Rect2(896, 256, 128, 128)
 atlas = ExtResource("3_uxnkf")
 region = Rect2(1024, 256, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc75l"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(512, 128, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_21agx"]
 animations = [{
 "frames": [{
@@ -50,7 +54,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_3ohgj")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -80,10 +84,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_edbga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc75l")
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 50.0
+"speed": 24.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h54rp"]
@@ -200,7 +207,7 @@ size = Vector2(77, 4)
 
 [sub_resource type="Animation" id="Animation_gkl2m"]
 resource_name = "move"
-length = 0.4
+length = 0.233337
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -221,7 +228,7 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -256,7 +263,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_2vggw"]
 resource_name = "change_direction"
-length = 0.3
+length = 0.233337
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -284,7 +291,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_6oubm"]
 resource_name = "idle"
-length = 0.6
+length = 0.36667
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -305,7 +312,7 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
@@ -330,9 +337,7 @@ script = ExtResource("1_kd7cj")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_21agx")
 animation = &"shoot"
-autoplay = "default"
-frame = 8
-frame_progress = 1.0
+autoplay = "idle"
 
 [node name="Point" type="ColorRect" parent="Gun/AnimatedSprite2D"]
 offset_left = 35.0
@@ -340,6 +345,10 @@ offset_top = 1.0
 offset_right = 37.0
 offset_bottom = 4.0
 color = Color(1, 0, 1, 0)
+
+[node name="LaunchTime" type="Timer" parent="Gun"]
+wait_time = 0.2
+one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_85743")
@@ -354,3 +363,9 @@ libraries = {
 "": SubResource("AnimationLibrary_pw6qk")
 }
 autoplay = "idle"
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Gun/LaunchTime" to="." method="_on_launch_time_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

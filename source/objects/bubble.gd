@@ -8,7 +8,6 @@ var target_pos
 var health = 1
 var isLive = true
 
-
 func _ready() -> void:
 	pass
 	
@@ -27,7 +26,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	health -= 1
+	if body.has_method("damage"):
+		body.damage()
 
 func _on_timer_timeout() -> void:
-	print("death")
 	queue_free()
