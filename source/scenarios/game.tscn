@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba2flo06c6yc4"]
+[gd_scene load_steps=5 format=3 uid="uid://ba2flo06c6yc4"]
 
 [ext_resource type="Script" path="res://source/scenarios/game.gd" id="1_r4u5d"]
 [ext_resource type="PackedScene" uid="uid://cu2lvgquj1el3" path="res://source/objects/player.tscn" id="1_v1y0d"]
+[ext_resource type="PackedScene" uid="uid://de7np42cllse2" path="res://source/objects/bubble.tscn" id="3_ejgia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmqha"]
 size = Vector2(7, 332.5)
@@ -15,6 +16,9 @@ position = Vector2(287, 34)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 162)
 zoom = Vector2(2, 2)
+
+[node name="Bubble" parent="." instance=ExtResource("3_ejgia")]
+position = Vector2(203, 225)
 
 [node name="World" type="Node" parent="."]
 
