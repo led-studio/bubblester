@@ -18,7 +18,7 @@ position = Vector2(288, 162)
 zoom = Vector2(2, 2)
 
 [node name="Bubble" parent="." instance=ExtResource("3_ejgia")]
-position = Vector2(203, 225)
+position = Vector2(229, 336)
 
 [node name="World" type="Node" parent="."]
 
@@ -31,3 +31,10 @@ shape = SubResource("RectangleShape2D_tmqha")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Walls"]
 position = Vector2(579.5, 163.5)
 shape = SubResource("RectangleShape2D_tmqha")
+
+[node name="ColorRect" type="ColorRect" parent="World"]
+offset_left = 1.0
+offset_top = 93.0
+offset_right = 584.0
+offset_bottom = 97.0
+color = Color(1, 1, 0, 1)

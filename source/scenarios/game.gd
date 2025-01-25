@@ -9,4 +9,3 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	time += 1 * delta
-	print(time)

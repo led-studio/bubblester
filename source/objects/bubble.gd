@@ -1,9 +1,11 @@
 extends Area2D
 
-var speed = 50
+@onready var player: CharacterBody2D = $"../Player"
+
+var speed = 100
 var player_pos
 var target_pos
-@onready var player: CharacterBody2D = $"../Player"
+var health = 1
 
 
 func _ready() -> void:
@@ -15,3 +17,10 @@ func _physics_process(delta: float) -> void:
 	
 	if position.distance_to(player_pos) > 3:
 		position += target_pos * speed * delta
+		
+	if health <= 0:
+		$AnimatedSprite2D.play("die")
+		queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	health -= 1
