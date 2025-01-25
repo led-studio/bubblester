@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
-@onready var gun_sprite: AnimatedSprite2D = $Gun/AnimatedSprite2D
-var bullet_path = preload("res://source/objects/bullet.tscn")
 const SPEED = 300.0
+const ACCELERATION = 2000.0
+const FRICTION = 200.0
+
+@onready var gun_sprite: AnimatedSprite2D = $Gun/AnimatedSprite2D
+
+var bullet_path = preload("res://source/objects/bullet.tscn")
 
 func _physics_process(delta: float) -> void:
 	# esto es para el cañón
