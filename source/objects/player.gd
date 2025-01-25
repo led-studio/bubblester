@@ -32,9 +32,10 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.flip_h = true
 		
 	if direction != 0:
-		$AnimatedSprite2D.play("idle")
+		$AnimationPlayer.play("change_direction")
+		$AnimationPlayer.queue("move")
 	else:
-		$AnimatedSprite2D.play("idle")
+		$AnimationPlayer.play("idle")
 	
 func fire():
 	var bullet = bullet_path.instantiate()

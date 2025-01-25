@@ -36,5 +36,5 @@ shape = SubResource("RectangleShape2D_tmqha")
 offset_left = 1.0
 offset_top = 93.0
 offset_right = 584.0
-offset_bottom = 97.0
-color = Color(1, 1, 0, 1)
+offset_bottom = 96.0
+color = Color(1, 1, 0, 0.239216)
