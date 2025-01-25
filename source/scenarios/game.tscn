@@ -4,26 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://cu2lvgquj1el3" path="res://source/objects/player.tscn" id="1_v1y0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmqha"]
-size = Vector2(7, 321)
+size = Vector2(7, 332.5)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_r4u5d")
 
 [node name="Player" parent="." instance=ExtResource("1_v1y0d")]
-position = Vector2(232, 224)
+position = Vector2(287, 34)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(230, 129)
-zoom = Vector2(2.5, 2.5)
+position = Vector2(288, 162)
+zoom = Vector2(2, 2)
 
 [node name="World" type="Node" parent="."]
 
 [node name="Walls" type="StaticBody2D" parent="World"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls"]
-position = Vector2(-5, 127)
+position = Vector2(-3, 162.75)
 shape = SubResource("RectangleShape2D_tmqha")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Walls"]
-position = Vector2(464.5, 110.5)
+position = Vector2(579.5, 163.5)
 shape = SubResource("RectangleShape2D_tmqha")

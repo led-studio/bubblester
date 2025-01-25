@@ -1,26 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu2lvgquj1el3"]
+[gd_scene load_steps=7 format=3 uid="uid://cu2lvgquj1el3"]
 
 [ext_resource type="Script" path="res://source/objects/player.gd" id="1_kd7cj"]
-[ext_resource type="PackedScene" uid="uid://k4ce8b3rhrsf" path="res://source/objects/gun.tscn" id="2_wdpj2"]
+[ext_resource type="Texture2D" uid="uid://b64trh2rwt176" path="res://assets/images/cañon.png" id="2_xosf7"]
+[ext_resource type="Texture2D" uid="uid://b53vqtvrfopuq" path="res://assets/images/n4ve.png" id="3_uxnkf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rp5r"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85743"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rp5r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxo71"]
-radius = 18.0
+radius = 13.0384
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_kd7cj")
 
-[node name="Gun" parent="." instance=ExtResource("2_wdpj2")]
-visible = false
-position = Vector2(0, -16)
+[node name="Gun" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -19.0
-offset_top = -20.0
-offset_right = 21.0
-offset_bottom = 20.0
-color = Color(0.388235, 0.286275, 1, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+rotation = 1.5708
+texture = ExtResource("2_xosf7")
+
+[node name="Point" type="ColorRect" parent="Gun/Sprite2D"]
+offset_left = 39.0
+offset_top = -2.0
+offset_right = 41.0
+offset_bottom = 1.0
+color = Color(1, 0, 1, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_85743")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jxo71")
