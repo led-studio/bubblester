@@ -1,12 +1,13 @@
 extends Area2D
 
 @onready var player: CharacterBody2D;
+@onready var tadbobble = preload("res://source/objects/tadbobble.tscn")
 
-var speed = 100
+var speed = 45
 var player_pos
 var target_pos
 var last_position
-var health = 1
+var health = 3
 var is_live = true
 var can_track = true
 
@@ -17,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	if is_live:
 		player_pos = player.position
 		
-		if position.distance_to(player_pos) > 90 && can_track:
+		if position.distance_to(player_pos) > 10 && can_track:
 			target_pos = (player_pos - position).normalized()
 			position += target_pos * speed * delta * ((Global.difficultyMultiplayer / 10) +1)
 		else:
@@ -36,4 +37,9 @@ func _on_body_entered(body: Node2D) -> void:
 		body.damage()
 
 func _on_timer_timeout() -> void:
+	for i in 3:
+		var enemy = tadbobble.instantiate()
+		enemy.position = position
+		enemy.player = player
+		get_parent().add_child(enemy)
 	queue_free()

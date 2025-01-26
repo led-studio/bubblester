@@ -14,6 +14,10 @@ func _process(delta: float) -> void:
 	if time == 1.0:
 		$World/Spawner.spawn()
 		print("Enemigo de prueba")
+	elif time == 15.0:
+		Global.increase_difficulty()
+	elif time == 30.0:
+		Global.increase_difficulty()
 		
 func generate_random_enemy():
 	var random = randi() % 10 - Global.difficultyMultiplayer

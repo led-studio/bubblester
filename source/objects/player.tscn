@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://cu2lvgquj1el3"]
+[gd_scene load_steps=42 format=3 uid="uid://cu2lvgquj1el3"]
 
 [ext_resource type="Script" path="res://source/objects/player.gd" id="1_kd7cj"]
+[ext_resource type="PackedScene" uid="uid://dwc01qq2lydmv" path="res://source/Particles/explode.tscn" id="3_fu47a"]
 [ext_resource type="Texture2D" uid="uid://b53vqtvrfopuq" path="res://assets/images/n4ve.png" id="3_uxnkf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ohgj"]
@@ -235,8 +236,8 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8x41"]
-size = Vector2(77, 4)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_psaj1"]
+height = 73.0
 
 [sub_resource type="Animation" id="Animation_mq0xd"]
 length = 0.001
@@ -263,6 +264,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explode:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_2vggw"]
@@ -291,6 +328,58 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_i7snw"]
+resource_name = "die"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explode:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_6oubm"]
@@ -383,6 +472,7 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_mq0xd"),
 "change_direction": SubResource("Animation_2vggw"),
+"die": SubResource("Animation_i7snw"),
 "idle": SubResource("Animation_6oubm"),
 "move": SubResource("Animation_gkl2m"),
 "quick": SubResource("Animation_m4shk")
@@ -418,7 +508,8 @@ animation = &"move"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_l8x41")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_psaj1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -426,8 +517,17 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="Explode" parent="." instance=ExtResource("3_fu47a")]
+emitting = false
+
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="Death" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="Gun/LaunchTime" to="." method="_on_launch_time_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Death" to="." method="_on_death_timeout"]

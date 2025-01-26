@@ -12,6 +12,7 @@ var changing_side = false
 var is_idle = true
 var is_on_cooldown = false
 var last_key_pressed = 0
+var health = 3
 
 func _physics_process(delta: float) -> void:
 	# esto es para el movimiento del cañón
@@ -66,6 +67,10 @@ func _process(delta: float) -> void:
 		last_key_pressed = 1
 	elif Input.is_action_pressed("move_left"):
 		last_key_pressed = -1
+		
+	if health == 0:
+		animation.play("die")
+		$Death.start()
 	
 func fire():
 	is_on_cooldown = true
@@ -73,10 +78,13 @@ func fire():
 	$Gun/LaunchTime.start()
 	$Cooldown.start()
 
+func damage():
+	health -= 1
+	if health != 0:
+		pass #animation.play("hurt")
 
 func _on_cooldown_timeout() -> void:
 	is_on_cooldown = false
-
 
 func _on_launch_time_timeout() -> void:
 	var bullet = bullet_path.instantiate()
@@ -84,3 +92,8 @@ func _on_launch_time_timeout() -> void:
 	bullet.pos = $Gun/AnimatedSprite2D/Point.global_position
 	bullet.rota = deg_to_rad(gun.global_rotation_degrees)
 	get_parent().add_child(bullet)
+
+
+func _on_death_timeout() -> void:
+	Global.restart()
+	pass # Replace with function body.
