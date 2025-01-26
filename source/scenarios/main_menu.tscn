@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://iqo8l1tl1nnb"]
+[gd_scene load_steps=5 format=3 uid="uid://iqo8l1tl1nnb"]
 
 [ext_resource type="Texture2D" uid="uid://c63dyf5052m2c" path="res://assets/images/bg.png" id="1_8dv62"]
 [ext_resource type="Script" path="res://source/scenarios/main_menu.gd" id="1_boyui"]
 [ext_resource type="FontFile" uid="uid://cf2yy60vesm0s" path="res://assets/data/pixelify-sans+.ttf" id="2_ovge4"]
+[ext_resource type="PackedScene" uid="uid://bmqdf63a2cfy" path="res://source/scenarios/credits_menu.tscn" id="4_stbrq"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -89,3 +90,7 @@ theme_override_fonts/font = ExtResource("2_ovge4")
 theme_override_font_sizes/font_size = 27
 text = "EXIT GAME
 "
+
+[node name="Credits_Menu" parent="." instance=ExtResource("4_stbrq")]
+visible = false
+layout_mode = 1
