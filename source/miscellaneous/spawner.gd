@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var bubble = preload("res://source/objects/jumbobble.tscn")
+@onready var bubble = preload("res://source/objects/bubble.tscn")
 @onready var player: CharacterBody2D = $"../../Player"
 
 var is_on_cooldown = false

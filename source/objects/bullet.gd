@@ -20,7 +20,7 @@ func _ready() -> void:
 		2:
 			$AnimatedSprite2D.play("third")
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity = Vector2(speed, 0).rotated(dir)
 	move_and_slide()
 	

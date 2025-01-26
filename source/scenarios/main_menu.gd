@@ -11,7 +11,7 @@ func _ready():
 	exit_button.button_down.connect(on_exit_pressed)
 
 func on_play_pressed() -> void: 
-	get_tree().change_scene_to_packed(start_level)
+	Transition.change_scene("res://source/scenarios/game.tscn")
 
 func on_credits_pressed() -> void: 
 	pass

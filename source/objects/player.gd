@@ -13,8 +13,11 @@ var is_idle = true
 var is_on_cooldown = false
 var last_key_pressed = 0
 var health = 3
+var can_move = true
 
 func _physics_process(delta: float) -> void:
+	if !can_move:
+		return
 	# esto es para el movimiento del cañón
 	gun.look_at(get_global_mouse_position())
 	
@@ -68,9 +71,11 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("move_left"):
 		last_key_pressed = -1
 		
-	if health == 0:
+	if health <= 0:
+		can_move = false
 		animation.play("die")
-		$Death.start()
+		await $AnimationPlayer.animation_finished
+		Transition.restart()
 	
 func fire():
 	is_on_cooldown = true
@@ -84,6 +89,7 @@ func damage():
 		pass #animation.play("hurt")
 
 func _on_cooldown_timeout() -> void:
+	gun.play("idle")
 	is_on_cooldown = false
 
 func _on_launch_time_timeout() -> void:
@@ -92,8 +98,3 @@ func _on_launch_time_timeout() -> void:
 	bullet.pos = $Gun/AnimatedSprite2D/Point.global_position
 	bullet.rota = deg_to_rad(gun.global_rotation_degrees)
 	get_parent().add_child(bullet)
-
-
-func _on_death_timeout() -> void:
-	Global.restart()
-	pass # Replace with function body.

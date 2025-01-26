@@ -20,10 +20,10 @@ func _physics_process(delta: float) -> void:
 		
 		if position.distance_to(player_pos) > 10 && can_track:
 			target_pos = (player_pos - position).normalized()
-			position += target_pos * speed * delta * ((Global.difficultyMultiplayer / 10) +1)
+			position += target_pos * speed * delta * Global.speed
 		else:
 			can_track = false
-			position += target_pos * speed * delta * ((Global.difficultyMultiplayer / 10) +1)
+			position += target_pos * speed * delta * Global.speed
 		
 	if health <= 0 && is_live:
 		$AnimatedSprite2D.play("die")
