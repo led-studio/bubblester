@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://46k0lste0r4f"]
+
+[ext_resource type="Texture2D" uid="uid://di1xwkgdbp7vv" path="res://assets/images/bubble_particle.png" id="1_w06kc"]
+
+[sub_resource type="Curve" id="Curve_lvcn0"]
+_data = [Vector2(0.00294118, 1), 0.0, 0.0, 0, 0, Vector2(0.0558823, 0.894919), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_tjbix"]
+offsets = PackedFloat32Array(0.445513, 0.682692, 0.916667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.705882, 1, 1, 1, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+rotation = 1.53589
+emitting = false
+amount = 25
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("1_w06kc")
+emission_shape = 1
+emission_sphere_radius = 7.12
+gravity = Vector2(0, -590)
+initial_velocity_min = 200.0
+initial_velocity_max = 294.44
+scale_amount_min = 0.5
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_lvcn0")
+color_ramp = SubResource("Gradient_tjbix")

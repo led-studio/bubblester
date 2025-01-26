@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvobgtcijbt7k"]
+
+[ext_resource type="Texture2D" uid="uid://di1xwkgdbp7vv" path="res://assets/images/bubble_particle.png" id="1_hdrqb"]
+
+[sub_resource type="Curve" id="Curve_680mb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0970588, 0.879908), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_c5b5v"]
+offsets = PackedFloat32Array(0.397436, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+amount = 30
+explosiveness = 0.06
+randomness = 1.0
+texture = ExtResource("1_hdrqb")
+emission_shape = 1
+emission_sphere_radius = 4.28
+spread = 60.3
+gravity = Vector2(200, -100)
+initial_velocity_min = 72.23
+initial_velocity_max = 105.56
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_680mb")
+color_ramp = SubResource("Gradient_c5b5v")
