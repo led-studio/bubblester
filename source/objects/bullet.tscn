@@ -1,119 +1,67 @@
-[gd_scene load_steps=16 format=3 uid="uid://3r0ec3p41ocd"]
+[gd_scene load_steps=10 format=3 uid="uid://cbql2pvd4a8yu"]
 
 [ext_resource type="Script" path="res://source/objects/bullet.gd" id="1_ix112"]
 [ext_resource type="Texture2D" uid="uid://c4f1cc0ng7dvr" path="res://assets/images/bullets.png" id="2_cnpoa"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_om46e"]
-radius = 6.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dc4ej"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg0nj"]
 atlas = ExtResource("2_cnpoa")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcocf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm68h"]
 atlas = ExtResource("2_cnpoa")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(16, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ksrht"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqhxi"]
 atlas = ExtResource("2_cnpoa")
-region = Rect2(32, 0, 16, 16)
+region = Rect2(32, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bji5l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_27qyc"]
 atlas = ExtResource("2_cnpoa")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(48, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nl0y3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnyyq"]
 atlas = ExtResource("2_cnpoa")
-region = Rect2(0, 16, 16, 16)
+region = Rect2(64, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cpriu"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7w7l"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqj30"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(0, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c8luk"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(16, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_018dd"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(32, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mwdlq"]
-atlas = ExtResource("2_cnpoa")
-region = Rect2(48, 32, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7u4g1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_a05ov"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dc4ej")
+"texture": SubResource("AtlasTexture_qg0nj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lcocf")
+"texture": SubResource("AtlasTexture_qm68h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ksrht")
+"texture": SubResource("AtlasTexture_cqhxi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bji5l")
+"texture": SubResource("AtlasTexture_27qyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnyyq")
 }],
 "loop": true,
-"name": &"first",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nl0y3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cpriu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7w7l")
-}],
-"loop": true,
-"name": &"second",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tqj30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c8luk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_018dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mwdlq")
-}],
-"loop": true,
-"name": &"third",
+"name": &"default",
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3uh2"]
+radius = 5.0
+
 [node name="Bullet" type="CharacterBody2D"]
-z_index = 4
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_ix112")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_om46e")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_7u4g1")
-animation = &"first"
-frame_progress = 0.0444347
+sprite_frames = SubResource("SpriteFrames_a05ov")
+autoplay = "default"
+frame = 1
+frame_progress = 0.8716
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w3uh2")
 
 [node name="Life" type="Timer" parent="."]
 wait_time = 5.0

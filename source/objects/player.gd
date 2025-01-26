@@ -4,17 +4,24 @@ const SPEED = 300.0
 const ACCELERATION = 6000.0
 const FRICTION = 3000.0
 
-@onready var gun: AnimatedSprite2D = $Gun/AnimatedSprite2D
+@onready var gun: AnimatedSprite2D = $Gun/Launcher
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
+var torpedo_path = preload("res://source/objects/torpedo.tscn")
 var bullet_path = preload("res://source/objects/bullet.tscn")
+var pellet_path = preload("res://source/objects/pellet.tscn")
+
+
+var last_key_pressed = 0
+var current_gun = 0
+
 var changing_side = false
 var is_idle = true
 var is_on_cooldown = false
-var last_key_pressed = 0
 var health = 3
 var can_move = true
 var is_dying = false
+var is_hurt = false
 
 func _physics_process(delta: float) -> void:
 	if !can_move:
@@ -80,23 +87,77 @@ func _process(_delta: float) -> void:
 		Transition.restart()
 	
 func fire():
-	is_on_cooldown = true
 	gun.play("shoot")
-	$Gun/LaunchTime.start()
+	is_on_cooldown = true
 	$Cooldown.start()
+	$Gun/LaunchTime.start()
 
 func damage():
-	health -= 1
-	if health != 0:
-		pass #animation.play("hurt")
+	if !is_hurt:
+		health -= 1
+		$Effects.play("hurt")
+	
+func set_hurt():
+	is_hurt = !is_hurt
+	
+func change_gun(number:int):
+	current_gun = number
+	$Gun/Launcher.visible = false
+	$Gun/Musket.visible = false
+	$Gun/Machinegun.visible = false
+	$Gun/LaunchTime.wait_time = 0.2
+	match number:
+		0:
+			gun = $Gun/Launcher
+			$Gun/Launcher.visible = true
+			$Cooldown.wait_time = 0.5
+		1:
+			gun = $Gun/Musket
+			$Gun/Musket.visible = true
+		2:
+			gun = $Gun/Machinegun
+			$Gun/Machinegun.visible = true
+			$Cooldown.wait_time = 0.075
+			$Gun/LaunchTime.wait_time = 0.015
+	pass
 
 func _on_cooldown_timeout() -> void:
 	gun.play("idle")
 	is_on_cooldown = false
 
 func _on_launch_time_timeout() -> void:
-	var bullet = bullet_path.instantiate()
-	bullet.dir = deg_to_rad(gun.rotation_degrees)
-	bullet.pos = $Gun/AnimatedSprite2D/Point.global_position
-	bullet.rota = deg_to_rad(gun.global_rotation_degrees)
-	get_parent().add_child(bullet)
+	spawn_bullet()
+	
+func spawn_bullet() -> void:
+	var bullet
+	match current_gun:
+		0:
+			bullet = torpedo_path.instantiate()
+			bullet.pos = $Gun/Launcher/Point.global_position
+			bullet.dir = deg_to_rad(gun.rotation_degrees)
+			bullet.rota = deg_to_rad(gun.global_rotation_degrees)
+			get_parent().add_child(bullet)
+		1:
+			bullet = pellet_path.instantiate()
+			bullet.pos = $Gun/Musket/Point.global_position
+			bullet.dir = deg_to_rad(gun.rotation_degrees + 25)
+			bullet.rota = deg_to_rad(gun.global_rotation_degrees + 25)
+			get_parent().add_child(bullet)
+			
+			var bullet2 = pellet_path.instantiate()
+			bullet2.pos = $Gun/Musket/Point.global_position
+			bullet2.dir = deg_to_rad(gun.rotation_degrees)
+			bullet2.rota = deg_to_rad(gun.global_rotation_degrees)
+			get_parent().add_child(bullet2)
+			
+			var bullet3 = pellet_path.instantiate()
+			bullet3.pos = $Gun/Musket/Point.global_position
+			bullet3.dir = deg_to_rad(gun.rotation_degrees - 25)
+			bullet3.rota = deg_to_rad(gun.global_rotation_degrees - 25)
+			get_parent().add_child(bullet3)
+		2:
+			bullet = bullet_path.instantiate()
+			bullet.pos = $Gun/Machinegun/Point.global_position
+			bullet.dir = deg_to_rad(gun.rotation_degrees)
+			bullet.rota = deg_to_rad(gun.global_rotation_degrees)
+			get_parent().add_child(bullet)

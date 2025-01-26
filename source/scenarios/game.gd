@@ -11,10 +11,12 @@ func _process(delta: float) -> void:
 	time += 1 * delta
 	time = snapped(time, 0.01)
 
-	if time == 1.0:
+	if time == 5.0:
+		$Player.change_gun(1)
 		$World/Spawner.spawn()
 		print("Enemigo de prueba")
-	elif time == 15.0:
+	elif time == 10.0:
+		$Player.change_gun(2)
 		Global.increase_difficulty()
 	elif time == 30.0:
 		Global.increase_difficulty()

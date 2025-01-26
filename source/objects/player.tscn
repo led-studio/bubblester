@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cu2lvgquj1el3"]
+[gd_scene load_steps=45 format=3 uid="uid://cu2lvgquj1el3"]
 
 [ext_resource type="Script" path="res://source/objects/player.gd" id="1_kd7cj"]
+[ext_resource type="Texture2D" uid="uid://cahdgs4jyo8r0" path="res://assets/images/guns.png" id="3_ft81u"]
 [ext_resource type="PackedScene" uid="uid://dwc01qq2lydmv" path="res://source/miscellaneous/explode.tscn" id="3_fu47a"]
 [ext_resource type="Texture2D" uid="uid://b53vqtvrfopuq" path="res://assets/images/n4ve.png" id="3_uxnkf"]
 
@@ -90,6 +91,137 @@ animations = [{
 "texture": SubResource("AtlasTexture_cc75l")
 }],
 "loop": false,
+"name": &"shoot",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lbou"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtn6c"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6htd1"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyox5"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yreva"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn3hq"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plgyy"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgpaj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lbou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtn6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6htd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyox5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yreva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn3hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plgyy")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjkkf"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21muh"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbgv7"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talnd"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv5gr"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v3w6"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(128, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um3va"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(256, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqefn"]
+atlas = ExtResource("3_ft81u")
+region = Rect2(384, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eivsj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjkkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21muh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbgv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talnd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv5gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v3w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_um3va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqefn")
+}],
+"loop": true,
 "name": &"shoot",
 "speed": 24.0
 }]
@@ -348,6 +480,60 @@ _data = {
 "quick": SubResource("Animation_m4shk")
 }
 
+[sub_resource type="Animation" id="Animation_fseev"]
+resource_name = "hurt"
+length = 0.800003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_hurt"
+}, {
+"args": [],
+"method": &"set_hurt"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fp4r5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68mr0"]
+_data = {
+"RESET": SubResource("Animation_fp4r5"),
+"hurt": SubResource("Animation_fseev")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -355,17 +541,45 @@ script = ExtResource("1_kd7cj")
 
 [node name="Gun" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gun"]
+[node name="Launcher" type="AnimatedSprite2D" parent="Gun"]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_21agx")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Point" type="ColorRect" parent="Gun/AnimatedSprite2D"]
-offset_left = 35.0
-offset_top = 1.0
-offset_right = 37.0
-offset_bottom = 4.0
+[node name="Point" type="ColorRect" parent="Gun/Launcher"]
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 38.0
+offset_bottom = 0.999996
+color = Color(1, 0, 1, 0)
+
+[node name="Machinegun" type="AnimatedSprite2D" parent="Gun"]
+visible = false
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_rgpaj")
+animation = &"shoot"
+autoplay = "idle"
+
+[node name="Point" type="ColorRect" parent="Gun/Machinegun"]
+offset_left = 30.0
+offset_top = -2.0
+offset_right = 32.0
+offset_bottom = 0.999996
+color = Color(1, 0, 1, 0)
+
+[node name="Musket" type="AnimatedSprite2D" parent="Gun"]
+visible = false
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_eivsj")
+animation = &"shoot"
+autoplay = "idle"
+
+[node name="Point" type="ColorRect" parent="Gun/Musket"]
+offset_left = 30.0
+offset_top = -2.0
+offset_right = 32.0
+offset_bottom = 0.999996
 color = Color(1, 0, 1, 0)
 
 [node name="LaunchTime" type="Timer" parent="Gun"]
@@ -387,6 +601,11 @@ libraries = {
 "": SubResource("AnimationLibrary_pw6qk")
 }
 autoplay = "idle"
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_68mr0")
+}
 
 [node name="Explode" parent="." instance=ExtResource("3_fu47a")]
 emitting = false
