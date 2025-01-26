@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var bubble = preload("res://source/objects/bubble.tscn")
+@onready var bubble = preload("res://source/objects/jumbobble.tscn")
 @onready var player: CharacterBody2D = $"../../Player"
 
 var is_on_cooldown = false
@@ -17,12 +17,12 @@ func spawn():
 	get_parent().add_child(enemy)
 
 func _on_cycle_timeout() -> void:
-	random = randi() % 2
+	random = randi() % 10
 	if random == 1.0:
 		spawn()
 	pass
 	
 	is_on_cooldown = false
-
+	
 func activate():
 	$Cycle.start()

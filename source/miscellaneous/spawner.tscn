@@ -5,14 +5,13 @@
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_mquqc")
 
-[node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.5
+[node name="Cycle" type="Timer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -5.0
 offset_top = -5.0
 offset_right = 6.0
 offset_bottom = 6.0
-color = Color(0.773139, 0.366532, 0.0296247, 1)
+color = Color(0.465534, 0.832335, 1, 1)
 
-[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Cycle" to="." method="_on_cycle_timeout"]

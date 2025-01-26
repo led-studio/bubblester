@@ -11,18 +11,19 @@ func _process(delta: float) -> void:
 	time += 1 * delta
 	time = snapped(time, 0.01)
 
-	if time == 5.0:
-		$Player.change_gun(1)
-		$World/Spawner.spawn()
-		print("Enemigo de prueba")
-	elif time == 10.0:
-		$Player.change_gun(2)
-		Global.increase_difficulty()
-	elif time == 30.0:
-		Global.increase_difficulty()
+	match time:
+		2.0:
+			$World/Spawner.spawn()
+			print("Enemigo de prueba")
+		3.0:
+			$World/Spawner.activate()
+		20.0:
+			$World/jumbobble_spawner.spawn()
+		25.0:
+			$World/jumbobble_spawner.activate()
 		
 func generate_random_enemy():
-	var random = randi() % 10 - Global.difficultyMultiplayer
+	var random = randi() % 10
 	if random == 1.0:
 		$World/Spawner.spawn()
 	pass
