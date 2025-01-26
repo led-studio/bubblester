@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://de7np42cllse2"]
+[gd_scene load_steps=16 format=3 uid="uid://de7np42cllse2"]
 
 [ext_resource type="Script" path="res://source/objects/bubble.gd" id="1_hktwl"]
 [ext_resource type="Texture2D" uid="uid://bvqar3053f14o" path="res://assets/images/bubble.png" id="2_7gbci"]
@@ -29,6 +29,10 @@ region = Rect2(256, 64, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpt0a"]
 atlas = ExtResource("2_7gbci")
 region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbvwu"]
+atlas = ExtResource("2_7gbci")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3tqh"]
 atlas = ExtResource("2_7gbci")
@@ -66,10 +70,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mpt0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbvwu")
 }],
 "loop": false,
 "name": &"die",
-"speed": 12.0
+"speed": 24.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -101,6 +108,8 @@ shape = SubResource("CircleShape2D_dljg8")
 sprite_frames = SubResource("SpriteFrames_ac232")
 animation = &"die"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

@@ -9,10 +9,12 @@ const FRICTION = 3000.0
 
 var bullet_path = preload("res://source/objects/bullet.tscn")
 var changing_side = false
+var is_idle = true
 var is_on_cooldown = false
+var last_key_pressed = 0
 
 func _physics_process(delta: float) -> void:
-	# esto es para el cañón
+	# esto es para el movimiento del cañón
 	gun.look_at(get_global_mouse_position())
 	
 	if gun.rotation_degrees > 135:
@@ -32,6 +34,7 @@ func _physics_process(delta: float) -> void:
 		if velocity.length() > (FRICTION * delta):
 			velocity -= velocity.normalized() * (FRICTION * delta)
 		else:
+			is_idle = true
 			velocity.x = 0
 
 	move_and_slide()
@@ -42,14 +45,27 @@ func _physics_process(delta: float) -> void:
 	else:
 		$AnimatedSprite2D.flip_h = true
 		
-	if direction != 0:
+	if velocity.x != 0:
+		if  !is_idle && direction != last_key_pressed && direction != 0:
+			animation.play("quick")
+			animation.queue("move")
+			
 		if !changing_side:
 			animation.play("change_direction")
 			animation.queue("move")
-			changing_side = true
+			
+		changing_side = true
+		is_idle = false
 	else:
+		is_idle = true
 		changing_side = false
 		animation.play("idle")
+		
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("move_right"):
+		last_key_pressed = 1
+	elif Input.is_action_pressed("move_left"):
+		last_key_pressed = -1
 	
 func fire():
 	is_on_cooldown = true

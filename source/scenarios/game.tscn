@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://source/scenarios/game.gd" id="1_r4u5d"]
 [ext_resource type="PackedScene" uid="uid://cu2lvgquj1el3" path="res://source/objects/player.tscn" id="1_v1y0d"]
-[ext_resource type="PackedScene" uid="uid://de7np42cllse2" path="res://source/objects/bubble.tscn" id="3_ejgia"]
+[ext_resource type="PackedScene" uid="uid://bx2vj7oxia44t" path="res://source/miscellaneous/spawner.tscn" id="3_a51bo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmqha"]
 size = Vector2(7, 332.5)
@@ -17,10 +17,14 @@ position = Vector2(287, 34)
 position = Vector2(288, 162)
 zoom = Vector2(2, 2)
 
-[node name="Bubble" parent="." instance=ExtResource("3_ejgia")]
-position = Vector2(229, 336)
-
 [node name="World" type="Node" parent="."]
+
+[node name="SpawnTime" type="Timer" parent="World"]
+wait_time = 0.3
+autostart = true
+
+[node name="Spawner" parent="World" instance=ExtResource("3_a51bo")]
+position = Vector2(312, 376)
 
 [node name="Walls" type="StaticBody2D" parent="World"]
 
@@ -38,3 +42,5 @@ offset_top = 93.0
 offset_right = 584.0
 offset_bottom = 96.0
 color = Color(1, 1, 0, 0.239216)
+
+[connection signal="timeout" from="World/SpawnTime" to="." method="_on_spawn_time_timeout"]

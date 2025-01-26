@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cu2lvgquj1el3"]
+[gd_scene load_steps=40 format=3 uid="uid://cu2lvgquj1el3"]
 
 [ext_resource type="Script" path="res://source/objects/player.gd" id="1_kd7cj"]
 [ext_resource type="Texture2D" uid="uid://b53vqtvrfopuq" path="res://assets/images/n4ve.png" id="3_uxnkf"]
@@ -145,6 +145,22 @@ region = Rect2(256, 128, 128, 128)
 atlas = ExtResource("3_uxnkf")
 region = Rect2(384, 128, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc5e0"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocwcn"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(128, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhr0x"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(256, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hco6o"]
+atlas = ExtResource("3_uxnkf")
+region = Rect2(384, 384, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_85743"]
 animations = [{
 "frames": [{
@@ -200,39 +216,27 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc5e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocwcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhr0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hco6o")
+}],
+"loop": false,
+"name": &"quick",
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8x41"]
 size = Vector2(77, 4)
-
-[sub_resource type="Animation" id="Animation_gkl2m"]
-resource_name = "move"
-length = 0.16667
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"move"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.133333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
 
 [sub_resource type="Animation" id="Animation_mq0xd"]
 length = 0.001
@@ -318,12 +322,70 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_gkl2m"]
+resource_name = "move"
+length = 0.16667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"move"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_m4shk"]
+resource_name = "quick"
+length = 0.133337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"quick"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pw6qk"]
 _data = {
 "RESET": SubResource("Animation_mq0xd"),
 "change_direction": SubResource("Animation_2vggw"),
 "idle": SubResource("Animation_6oubm"),
-"move": SubResource("Animation_gkl2m")
+"move": SubResource("Animation_gkl2m"),
+"quick": SubResource("Animation_m4shk")
 }
 
 [node name="Player" type="CharacterBody2D"]
