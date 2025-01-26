@@ -1,10 +1,8 @@
 extends Node
 
 var difficultyMultiplayer:int = 1
-var speed:int = 1
-
-func _process(_delta: float) -> void:
-	speed = (Global.difficultyMultiplayer / 10)+1
+var speed:float = 1
 	
 func increase_difficulty():
 	difficultyMultiplayer += 1
+	speed += 0.1

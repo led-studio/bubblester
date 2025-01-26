@@ -22,18 +22,17 @@ func _physics_process(delta: float) -> void:
 			position += target_pos * speed * delta * Global.speed
 		else:
 			can_track = false
-			position += target_pos * speed * delta * Global.speed
+			if target_pos != null:
+				position += target_pos * speed * delta * Global.speed
 		
 	if health <= 0 && is_live:
-		$AnimatedSprite2D.play("die")
-		$CollisionShape2D.disabled = true
-		$Timer.start()
 		is_live = false
+		$CollisionShape2D.disabled = true
+		$AnimatedSprite2D.play("die")
+		await $AnimationPlayer.animation_finished
+		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	health -= 1
 	if body.has_method("damage"):
 		body.damage()
-
-func _on_timer_timeout() -> void:
-	queue_free()

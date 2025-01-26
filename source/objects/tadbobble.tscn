@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ddmc7gvhnq25s"]
+[gd_scene load_steps=24 format=3 uid="uid://ddmc7gvhnq25s"]
 
 [ext_resource type="Script" path="res://source/objects/tadbobble.gd" id="1_nysip"]
 [ext_resource type="Texture2D" uid="uid://dn7y67xi53wfg" path="res://assets/images/jumbobble.png" id="1_ueayx"]
@@ -136,6 +136,67 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqg1w"]
 radius = 12.0
 
+[sub_resource type="Animation" id="Animation_l8oty"]
+resource_name = "die"
+length = 0.200003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_5mjlx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_muuby"]
+_data = {
+"RESET": SubResource("Animation_5mjlx"),
+"die": SubResource("Animation_l8oty")
+}
+
 [node name="Tadbobble" type="Area2D"]
 collision_layer = 4
 collision_mask = 10
@@ -143,10 +204,8 @@ script = ExtResource("1_nysip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1txqk")
-animation = &"idle"
+animation = &"die"
 autoplay = "sleep"
-frame = 1
-frame_progress = 0.668035
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jqg1w")
@@ -155,8 +214,10 @@ shape = SubResource("CircleShape2D_jqg1w")
 one_shot = true
 autostart = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_muuby")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Sleep" to="." method="_on_sleep_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
