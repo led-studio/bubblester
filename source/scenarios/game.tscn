@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba2flo06c6yc4"]
+[gd_scene load_steps=7 format=3 uid="uid://ba2flo06c6yc4"]
 
 [ext_resource type="Script" path="res://source/scenarios/game.gd" id="1_r4u5d"]
 [ext_resource type="PackedScene" uid="uid://cu2lvgquj1el3" path="res://source/objects/player.tscn" id="1_v1y0d"]
 [ext_resource type="PackedScene" uid="uid://bx2vj7oxia44t" path="res://source/miscellaneous/spawner.tscn" id="3_a51bo"]
+[ext_resource type="Texture2D" uid="uid://cgb26biamswsu" path="res://assets/images/bg_sides.png" id="4_hm7ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmqha"]
 size = Vector2(7, 423.125)
@@ -12,13 +13,6 @@ size = Vector2(583.5, 61)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_r4u5d")
-
-[node name="Player" parent="." instance=ExtResource("1_v1y0d")]
-position = Vector2(287, 34)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(288, 162)
-zoom = Vector2(2, 2)
 
 [node name="World" type="Node" parent="."]
 
@@ -46,5 +40,26 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Killzone"]
 position = Vector2(288.25, -93)
 shape = SubResource("RectangleShape2D_o05xu")
+
+[node name="BG" type="Node2D" parent="World"]
+
+[node name="Parallax2D" type="Parallax2D" parent="World/BG"]
+z_index = -1
+repeat_size = Vector2(0, 1950)
+autoscroll = Vector2(0, 83)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="World/BG/Parallax2D"]
+z_index = -1
+position = Vector2(291, 976)
+texture = ExtResource("4_hm7ha")
+
+[node name="Player" parent="." instance=ExtResource("1_v1y0d")]
+z_index = 5
+position = Vector2(287, 34)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(288, 162)
+zoom = Vector2(2, 2)
 
 [connection signal="timeout" from="World/SpawnTime" to="." method="_on_spawn_time_timeout"]

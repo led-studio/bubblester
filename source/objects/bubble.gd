@@ -9,6 +9,7 @@ var last_position
 var health = 1
 var is_live = true
 var can_track = true
+var score = 5
 
 func _ready() -> void:
 	pass

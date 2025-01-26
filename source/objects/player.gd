@@ -14,6 +14,7 @@ var is_on_cooldown = false
 var last_key_pressed = 0
 var health = 3
 var can_move = true
+var is_dying = false
 
 func _physics_process(delta: float) -> void:
 	if !can_move:
@@ -45,9 +46,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Esto es para las animaciones
 	if direction == 1:
-		$AnimatedSprite2D.flip_h = false
+		$Sprite2D.flip_h = false
 	else:
-		$AnimatedSprite2D.flip_h = true
+		$Sprite2D.flip_h = true
 		
 	if velocity.x != 0:
 		if  !is_idle && direction != last_key_pressed && direction != 0:
@@ -65,14 +66,15 @@ func _physics_process(delta: float) -> void:
 		changing_side = false
 		animation.play("idle")
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("move_right"):
 		last_key_pressed = 1
 	elif Input.is_action_pressed("move_left"):
 		last_key_pressed = -1
 		
-	if health <= 0:
+	if health <= 0 && !is_dying:
 		can_move = false
+		is_dying = true
 		animation.play("die")
 		await $AnimationPlayer.animation_finished
 		Transition.restart()

@@ -8,6 +8,7 @@ var player_pos
 var target_pos
 var last_position
 var health = 3
+var score = 15
 var is_live = true
 var can_track = true
 
