@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://iqo8l1tl1nnb"]
 
-[ext_resource type="Texture2D" uid="uid://c63dyf5052m2c" path="res://assets/images/bg.png" id="1_8dv62"]
 [ext_resource type="Script" path="res://source/scenarios/main_menu.gd" id="1_boyui"]
 [ext_resource type="FontFile" uid="uid://cf2yy60vesm0s" path="res://assets/data/pixelify-sans+.ttf" id="2_ovge4"]
-[ext_resource type="PackedScene" uid="uid://bmqdf63a2cfy" path="res://source/scenarios/credits_menu.tscn" id="4_stbrq"]
+[ext_resource type="Texture2D" uid="uid://g4sjtjtlphst" path="res://assets/images/bg_bottom.png" id="2_qlwsp"]
+[ext_resource type="PackedScene" path="res://source/scenarios/credits_menu.tscn" id="4_stbrq"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -21,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_8dv62")
+texture = ExtResource("2_qlwsp")
 expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -74,7 +74,7 @@ custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ovge4")
 theme_override_font_sizes/font_size = 27
-text = "PLAY GAME"
+text = "PLAY"
 
 [node name="Credits_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(160, 32)
@@ -88,7 +88,7 @@ text = "CREDITS
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ovge4")
 theme_override_font_sizes/font_size = 27
-text = "EXIT GAME
+text = "EXIT
 "
 
 [node name="Credits_Menu" parent="." instance=ExtResource("4_stbrq")]

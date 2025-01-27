@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://bl5p6ga4j7tba"]
+
+[ext_resource type="Texture2D" uid="uid://cahdgs4jyo8r0" path="res://assets/images/guns.png" id="1_5drs4"]
+[ext_resource type="Script" path="res://source/miscellaneous/powerup.gd" id="1_6iobj"]
+[ext_resource type="Texture2D" uid="uid://di1xwkgdbp7vv" path="res://assets/images/bubble_particle.png" id="2_gkluc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qurl3"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thpxd"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(512, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ospof"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0rln"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(768, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7pi4"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(512, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvc6m"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(640, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7kp5"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(768, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdjew"]
+atlas = ExtResource("1_5drs4")
+region = Rect2(896, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8mrw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qurl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thpxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ospof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0rln")
+}],
+"loop": true,
+"name": &"machinegun",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7pi4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvc6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7kp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdjew")
+}],
+"loop": true,
+"name": &"moskete",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yx6ua"]
+radius = 9.0
+
+[node name="Powerup" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_6iobj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_gkluc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r8mrw")
+animation = &"moskete"
+autoplay = "moskete"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_yx6ua")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmqdf63a2cfy"]
+[gd_scene load_steps=3 format=3 uid="uid://cmjwjlnck6hcq"]
 
 [ext_resource type="Script" path="res://source/scenarios/credits_menu.gd" id="1_27yk4"]
 [ext_resource type="FontFile" uid="uid://cf2yy60vesm0s" path="res://assets/data/pixelify-sans+.ttf" id="1_bb1p2"]
@@ -30,13 +30,11 @@ theme_override_constants/separation = -48
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.133333, 0.552941, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("1_bb1p2")
 theme_override_font_sizes/font_size = 44
-text = "Credits 
-"
+text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -47,7 +45,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 10
 theme_override_fonts/font = ExtResource("1_bb1p2")
 theme_override_font_sizes/font_size = 27
-text = "Go back"
+text = "BACK"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 2
@@ -64,7 +62,7 @@ theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("1_bb1p2")
 theme_override_font_sizes/font_size = 33
 text = "
-Art - Faja
+Art - Fajamatrix
 Main programmer - Bonzer
 Programmer - Vutern 
 Font - Pixelify Sans by \"The Pixelify Sans Project Authors\"

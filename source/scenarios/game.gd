@@ -9,9 +9,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	time += 1 * delta
-	time = snapped(time, 0.01)
-
-	match time:
+	match snapped(time, 0.01):
 		2.0:
 			$World/Spawner.spawn()
 			print("Enemigo de prueba")
@@ -21,6 +19,8 @@ func _process(delta: float) -> void:
 			$World/jumbobble_spawner.spawn()
 		25.0:
 			$World/jumbobble_spawner.activate()
+			$World/poweup_spawner.spawn()
+			$World/poweup_spawner.activate()
 		
 func generate_random_enemy():
 	var random = randi() % 10

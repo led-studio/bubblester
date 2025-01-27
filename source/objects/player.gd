@@ -101,16 +101,19 @@ func set_hurt():
 	is_hurt = !is_hurt
 	
 func change_gun(number:int):
+	if number > 2:
+		number = 0
+		
 	current_gun = number
 	$Gun/Launcher.visible = false
 	$Gun/Musket.visible = false
 	$Gun/Machinegun.visible = false
 	$Gun/LaunchTime.wait_time = 0.2
+	$Cooldown.wait_time = 0.5
 	match number:
 		0:
 			gun = $Gun/Launcher
 			$Gun/Launcher.visible = true
-			$Cooldown.wait_time = 0.5
 		1:
 			gun = $Gun/Musket
 			$Gun/Musket.visible = true
