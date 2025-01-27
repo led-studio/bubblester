@@ -6,6 +6,7 @@ const FRICTION = 3000.0
 
 @onready var gun: AnimatedSprite2D = $Gun/Launcher
 @onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var shoot: AudioStreamPlayer2D = $Gun/Launcher/Shoot
 
 var torpedo_path = preload("res://source/objects/torpedo.tscn")
 var bullet_path = preload("res://source/objects/bullet.tscn")
@@ -87,6 +88,7 @@ func _process(_delta: float) -> void:
 		Transition.restart()
 	
 func fire():
+	shoot.play()
 	gun.play("shoot")
 	is_on_cooldown = true
 	$Cooldown.start()
@@ -114,14 +116,17 @@ func change_gun(number:int):
 		0:
 			gun = $Gun/Launcher
 			$Gun/Launcher.visible = true
+			shoot = $Gun/Launcher/Shoot
 		1:
 			gun = $Gun/Musket
 			$Gun/Musket.visible = true
+			shoot = $Gun/Musket/Shoot
 		2:
 			gun = $Gun/Machinegun
 			$Gun/Machinegun.visible = true
 			$Cooldown.wait_time = 0.075
 			$Gun/LaunchTime.wait_time = 0.015
+			shoot = $Gun/Machinegun/Shoot
 	pass
 
 func _on_cooldown_timeout() -> void:

@@ -15,4 +15,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("change_gun"):
+		$AudioStreamPlayer2D.play()
+		await $AudioStreamPlayer2D.finished
 		body.change_gun(type_gun)
+		queue_free()

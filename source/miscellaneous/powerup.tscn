@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bl5p6ga4j7tba"]
+[gd_scene load_steps=15 format=3 uid="uid://bl5p6ga4j7tba"]
 
 [ext_resource type="Texture2D" uid="uid://cahdgs4jyo8r0" path="res://assets/images/guns.png" id="1_5drs4"]
 [ext_resource type="Script" path="res://source/miscellaneous/powerup.gd" id="1_6iobj"]
 [ext_resource type="Texture2D" uid="uid://di1xwkgdbp7vv" path="res://assets/images/bubble_particle.png" id="2_gkluc"]
+[ext_resource type="AudioStream" uid="uid://br77xkt3ekb87" path="res://assets/audio/powerup.ogg" id="4_nlib4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qurl3"]
 atlas = ExtResource("1_5drs4")
@@ -81,6 +82,7 @@ collision_mask = 2
 script = ExtResource("1_6iobj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(4, 4)
 texture = ExtResource("2_gkluc")
 
@@ -92,5 +94,8 @@ autoplay = "moskete"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_yx6ua")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nlib4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
